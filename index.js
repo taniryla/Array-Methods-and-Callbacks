@@ -83,9 +83,16 @@ hint: the strings returned need to exactly match the string in step 4.
  */
 
 function getWinnersByYear(array, callback1, callback2) {
-    /* code here */
+    const years = callback1(array);
+    const winners = callback2(array);
+
+    const result = years.map((item, i) => {
+     return `In ${item}, ${winners[i]} won the world cup!`;
+    });
+    return result;
 }
 
+// console.log(getWinnersByYear(fifaData, getYears, getWinners));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -98,11 +105,14 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(/* code here */) {
-   /* code here */
+function getAverageGoals(callback) {
+   const singleValue = callback.reduce((acc, item) => {
+   return acc + item['Home Team Goals'] + item['Away Team Goals'];
+}, 0);
+   return (singleValue / callback.length).toFixed(2);
 }
 
-
+console.log('Task 6', getAverageGoals(getFinals(fifaData)));
 
 
 /// 🥅 STRETCH 🥅 ///
